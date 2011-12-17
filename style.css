@@ -1,0 +1,48 @@
+/* 
+    Document   : style
+    Created on : 15 déc. 2011, 14:20:52
+    Author     : ggautreau
+*/
+
+#loading{
+	background-image:url('img/loading.gif');
+	background-position: top center;
+	background-repeat: no-repeat;
+	padding-top: 40px;
+	text-align: center;
+	margin-top:40px;
+}
+
+#crap{
+	display:none;
+}
+
+.progress{
+	width:200px;
+	height:10px;
+	margin:10px auto;
+	border:1px solid #666;
+}
+
+.progressIndicator{
+	background-color:#666;
+	height:10px;
+	width:0;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+td{
+	border:1px solid #999;
+	padding:2px 5px;
+}
+
+th{
+	background-color: #999;
+	color:white;
+	text-align:center;
+	padding:2px 5px;
+	border-right: 1px solid white;
+}
