@@ -106,7 +106,9 @@ register("Has attribute '[attribute]'",
 		container.empty();
 	});
 
-
+/**
+ * Unstable test, does not return 1 element every time it's launched
+ */
 register("Hidden selector: ':hidden'",
 	function(){
 		return container.find(":hidden");
@@ -124,6 +126,9 @@ register("Hidden selector: ':hidden'",
 		.empty();
 	});
 	
+/**
+ * Unstable, returns 1 or 2 elements
+ */
 register("Visible selector ':visible'",
 	function(){
 		return container.find(":visible");

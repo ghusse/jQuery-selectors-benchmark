@@ -58,23 +58,6 @@ register("File selector ':file'",
 		createInputs(1, "file", container);
 	});
 	
-register("Focus selector ':focus'",
-	function(){
-		return container.find(":focus");
-	},
-	function(){
-		container.css("display", "block")
-		.css("width", 0)
-		.css("height", 0)
-		.css("overflow", "hidden");
-		createInputs(elements, "text", container);
-		container.find("input:last").focus();
-	},
-	function(){
-		container.css("display", "none");
-		container.empty	();
-	});
-	
 register("Image selector ':image'",
 	function(){
 		return container.find(":image");

@@ -39,9 +39,7 @@ register("Eq method '.eq()'",
 	
 register("Even selector ':even'",
 	function(){
-		// Hoping that the overhead of returning multiple
-		// elements is not too high
-		return $(container.find("div:even")[0]);
+		return container.find("div:even");
 	},
 	function(){
 		createDivs();
@@ -49,9 +47,7 @@ register("Even selector ':even'",
 	
 register("Odd selector ':odd'",
 	function(){
-		// Hoping that the overhead of returning multiple
-		// elements is not too high
-		return $(container.find("div:odd")[0]);
+		return container.find("div:odd");
 	},
 	function(){
 		createDivs();
@@ -95,15 +91,6 @@ register("Last selector ':last'",
 	},
 	function(){
 		createDivs();
-	});
-	
-register("Less than selector ':lt()'",
-	function(){
-		container.find("p:lt(" + (elements - 1) + ")");
-	},
-	function(){
-		createDivs(elements-1, container);
-		container.append("<p></p>");
 	});
 	
 register("Nth-child selector ':nth-child'",
