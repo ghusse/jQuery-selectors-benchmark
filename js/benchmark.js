@@ -22,7 +22,7 @@ executedTests = [];
 function register(name, benchMethod, setupMethod, teardownMethod){
 	teardownMethod = teardownMethod || function(){
 		container.empty()
-		};
+	};
 	
 	benchmarks.add(name,
 		function(){
@@ -58,26 +58,52 @@ function register(name, benchMethod, setupMethod, teardownMethod){
 	}
 	
 	function displayResult(bench){
-		var table = $("#results");
-		if (table.length == 0){
-			table = $("<table id='results'><tr><th>Test</th><th>Speed</th><th>Error</th></tr></table>").appendTo("body");
+		var tr;
+		
+		if (typeof bench.tr === "undefined"){
+			var table = $("#results");
+			if (table.length == 0){
+				table = $("<table id='results'><tr><th>Test</th><th>Speed</th><th>Error</th><th>Actions</th></tr></table>").appendTo("body");
+			}
+			
+			tr = $("<tr />").appendTo(table)
+		}else{
+			tr = bench.tr.empty();
 		}
 		
-		
-		var tr = $("<tr />").appendTo(table);
+		var link = $("<a href='#'>Relaunch</a>");
 			
 		$("<td />").appendTo(tr).text(bench.name);
-		$("<td />").appendTo(tr).text(Math.round(1/bench.stats.mean));
-		$("<td />").appendTo(tr)
+		$("<td class='speed' />").appendTo(tr).text(Math.round(1/bench.stats.mean));
+		$("<td class='error' />").appendTo(tr)
 		.text("" + (Math.round(bench.stats.rme * 100) / 100) + "%");
+		
+		$("<td />").appendTo(tr)
+		.append(link);
+		
+		(function(b, tr){
+			link.click(function(){
+				tr.find(".speed,.error").empty();
+				bench.tr = tr;
+				benchmarks.push(bench);
+				if (!benchmarks.running){
+					benchmarks.run();
+				}
+				
+				return false;
+			});
+		})(bench, tr);
 	}
 	
 	benchmarks = new Benchmark.Suite("Bench suite")
 	.on("cycle", function(event, bench){
 		console.log(String(bench));
-		executedTests.push(bench);
+		if (typeof bench.tr === 'undefined'){
+			executedTests.push(bench);	
+			$(document).trigger("progress", executedTests.length);
+		}
+		
 		displayResult(bench);
-		$(document).trigger("progress", executedTests.length);
 	})
 	.on("complete", function(){
 		end();
