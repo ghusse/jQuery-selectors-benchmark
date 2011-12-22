@@ -85,10 +85,13 @@ function register(name, benchMethod, setupMethod, teardownMethod){
 			link.click(function(){
 				tr.find(".speed,.error").empty();
 				bench.tr = tr;
-				benchmarks.push(bench);
-				if (!benchmarks.running){
-					benchmarks.run();
-				}
+				
+				bench.removeAllListeners();
+				bench.on("complete", function(e){
+					displayResult	(bench);
+				});
+				
+				bench.run();
 				
 				return false;
 			});
