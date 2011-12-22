@@ -64,6 +64,21 @@ register("Attribute ends with '[attr$=foo]'",
 	function(){
 		container.empty();
 	});
+
+register("Attribute equal '[attr=foo]'",
+	function(){
+		container.find("[data-attr='attr1']");
+	},
+	function(){
+		for (var i = 0; i < elements - 1; i++){
+			$("<div />").attr("data-attr", "attr").appendTo(container);
+		}
+		
+		$("<div />").attr("data-attr", "attr1" + (elements - 1)).appendTo(container);
+	},
+	function(){
+		container.empty();
+	});
 	
 register("Attribute not equal '[attr!=foo]'",
 	function(){
