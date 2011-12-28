@@ -33,6 +33,9 @@ function register(name, benchMethod, setupMethod, teardownMethod){
 			teardown: teardownMethod,
 			onStart: function(){
 				$(document).trigger("event", name);
+			},
+			options:{
+				maxTime:10
 			}
 		});
 }
@@ -100,7 +103,9 @@ function register(name, benchMethod, setupMethod, teardownMethod){
 	
 	benchmarks = new Benchmark.Suite("Bench suite")
 	.on("cycle", function(event, bench){
-		console.log(String(bench));
+		if (typeof console !== "undefined"){
+			console.log(String(bench))
+		};
 		if (typeof bench.tr === 'undefined'){
 			executedTests.push(bench);	
 			$(document).trigger("progress", executedTests.length);
