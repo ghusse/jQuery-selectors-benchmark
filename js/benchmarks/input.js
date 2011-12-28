@@ -21,7 +21,7 @@ function createInputs(number, type, container){
 	}
 }
 
-register("Button selector", 
+register("Button selector ':button'", 
 	function(){
 		return container.find(":button");
 	},
@@ -30,7 +30,7 @@ register("Button selector",
 		$("<input type='button' name='me' />").appendTo(container);
 	});
 	
-register("Checkbox selector",
+register("Checkbox selector ':checkbox'",
 	function(){
 		return container.find(":checkbox");
 	},
